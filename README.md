@@ -26,15 +26,15 @@ Merge upstream's master into ours:
 
 ```
 git checkout master
-git fetch
-git merge upstream/master
+git fetch --tags upstream
+git merge --ff-only upstream/master
 ```
 
-Update our `avr/develop` branch by rebasing on the most recent release tag:
+Update our `avr/develop` branch by merging the most recent release tag into it. Never rebase `avr/develop`, as then our `yarn.lock` on production may reference a commit that no longer exists
 
 ```
 git checkout avr/develop
-git rebase tags/TAG_NAME
+git merge tags/TAG_NAME
 ```
 
 Conflicts in dist files can be resolved by rerunning `grunt`.
